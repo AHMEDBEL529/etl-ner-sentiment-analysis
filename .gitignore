@@ -8,3 +8,4 @@ webserver_config.py
 airflow.cfg
 airflow.db
 models/
+minio/
