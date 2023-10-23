@@ -1,8 +1,10 @@
 {
-  "image": "quay.io/astronomer/astro-runtime:9.3.0",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
-    "ghcr.io/astronomer/devcontainer-features/astro-cli:latest": {}
+      "ghcr.io/astronomer/devcontainer-features/astro-cli:1": {
+        "version": "v1.9.0"
+      }
   },
-  "postCreateCommand": "./.devcontainer/setup.sh",
+  "postCreateCommand": "bash -i -c 'astro dev start -n --wait 5m'",
   "forwardPorts": [9090, 8080, 8501, 8502]
 }
