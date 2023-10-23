@@ -5,7 +5,7 @@
             "version": "v1.9.0"
         },
         "ghcr.io/devcontainers-contrib/features/bash-command:1": {
-            "command": "mkdir -p /workspaces/etl-ner-sentiment-analysis/models/ && echo 'Directory created by bash-command feature!'"
+            "command": "mkdir -p /workspaces/etl-ner-sentiment-analysis/models/ && echo 'Directory created by bash-command feature!' && astro dev start -n --wait 8m"
         }
     },
     "postCreateCommand": [
