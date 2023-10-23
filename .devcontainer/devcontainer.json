@@ -6,6 +6,7 @@
         }
     },
     "postCreateCommand": [
+      "mkdir -p /workspaces/etl-ner-sentiment-analysis/models/",
       "git clone https://huggingface.co/dslim/bert-base-NER /workspaces/etl-ner-sentiment-analysis/models/",
       "git clone https://huggingface.co/finiteautomata/bertweet-base-sentiment-analysis /workspaces/etl-ner-sentiment-analysis/models/",
       "bash -i -c 'astro dev start -n --wait 8m'"
