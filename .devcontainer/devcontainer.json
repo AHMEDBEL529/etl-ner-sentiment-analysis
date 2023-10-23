@@ -1,5 +1,5 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:linux",
+  "image": "quay.io/astronomer/astro-runtime:9.3.0",
   "features": {
     "ghcr.io/astronomer/devcontainer-features/astro-cli:latest": {}
   },
