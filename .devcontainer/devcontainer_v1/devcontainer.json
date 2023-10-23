@@ -1,0 +1,15 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/universal:2",
+    "features": {
+        "ghcr.io/astronomer/devcontainer-features/astro-cli:1": {
+          "version": "v1.9.0"
+        }
+    },
+    "postCreateCommand": [
+      "mkdir -p /workspaces/etl-ner-sentiment-analysis/models/",
+      "git clone https://huggingface.co/dslim/bert-base-NER /workspaces/etl-ner-sentiment-analysis/models/",
+      "git clone https://huggingface.co/finiteautomata/bertweet-base-sentiment-analysis /workspaces/etl-ner-sentiment-analysis/models/",
+      "bash -i -c 'astro dev start -n --wait 8m'"
+  ],
+    "forwardPorts": [9090, 8080, 8501, 8502]
+  }
