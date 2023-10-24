@@ -3,34 +3,18 @@ import duckdb
 import pandas as pd
 import altair as alt
 
-# -------------------- #
-# Local module imports #
-# -------------------- #
-# Comment this out if you don't have the include module.
-# from include.global_variables import global_variables as gv
-
-# ------------ #
-# GETTING DATA #
-# ------------ #
+# GETTING DATA
 
 duck_db_instance_name = "dwh"  # adjust this to your db name
 
 def get_sentiment_data(db=f"/usr/local/airflow/{duck_db_instance_name}"):
     """Function to query a local DuckDB instance for sentiment data."""
-
-    # Query duckdb database
     cursor = duckdb.connect(db)
-    
-    # Get sentiment data
     sentiment_data = cursor.execute(
         """SELECT name, sentiment, count FROM output;"""
     ).fetchall()
-
     cursor.close()
-
-    # Convert the result to a DataFrame
     df = pd.DataFrame(sentiment_data, columns=["name", "sentiment", "count"])
-    
     return df
 
 sentiment_df = get_sentiment_data()
@@ -62,7 +46,24 @@ if st.button("Apply Groupings"):
     for new_name, old_names in groupings.items():
         sentiment_df.loc[sentiment_df['name'].isin(old_names), 'name'] = new_name
 
-# Plot using Altair
+# Filter for only POS sentiment
+pos_df = sentiment_df[sentiment_df['sentiment'] == 'POS'].copy()
+
+# Calculate total POS count
+total_pos = pos_df['count'].sum()
+
+# Calculate percentage of each entity's POS count
+pos_df['percentage'] = (pos_df['count'] / total_pos) * 100
+
+# Pie Chart for POS Sentiment
+pie_chart = alt.Chart(pos_df).mark_arc().encode(
+    theta=alt.Theta('percentage:Q'),
+    color=alt.Color('name:N', legend=alt.Legend(title='Entities')),
+    tooltip=['name', alt.Tooltip('percentage:Q', title='Percentage'), 'count']
+)
+
+
+st.altair_chart(pie_chart, use_container_width=True)
 
 # Original sentiment distribution
 sentiment_df_sorted = sentiment_df.groupby(['name', 'sentiment']).sum().reset_index().sort_values(by='count', ascending=False)
