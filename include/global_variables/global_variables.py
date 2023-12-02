@@ -40,7 +40,7 @@ DUCKDB_INSTANCE_NAME = json.loads(os.environ["AIRFLOW_CONN_DUCKDB_DEFAULT"])["ho
 COMMENTS_IN_TABLE_NAME = "in_comments" + "_" + MY_VIDEO_ID
 
 # Datasets
-DS_DUCKDB_IN_COMMENTS = Dataset("duckdb://in_comments")
+DS_DUCKDB_IN_COMMENTS = Dataset(f"duckdb://{'in_comments' + '_' + MY_VIDEO_ID}")
 DS_COMMENTS_DATA_MINIO = Dataset(f"minio://{COMMENTS_BUCKET_NAME}")
 DS_DUCKDB_REPORTING = Dataset("duckdb://reporting")
 DS_START = Dataset("start")
