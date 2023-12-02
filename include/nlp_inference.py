@@ -135,7 +135,7 @@ def main():
     con = duckdb.connect(f"/usr/local/airflow/{duck_db_instance_name}")
 
     # create the table "my_table" from the DataFrame "my_df"
-    con.execute("CREATE OR REPLACE TABLE output AS SELECT * FROM sentiment_counts")
+    con.execute(f"CREATE OR REPLACE TABLE {"output" + "_" + gv.MY_VIDEO_ID} AS SELECT * FROM sentiment_counts")
     # Get the sum of column 'A'
     sum_count = sentiment_counts['count'].sum()
     print(f"sum : {sum_count}")  # Output: 6
