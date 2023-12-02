@@ -14,7 +14,7 @@ from pendulum import duration
 # -------------------- #
 
 MY_NAME = "AHMED"
-MY_VIDEO_ID = "9jBgGY2Ww9Q"  # Add your desired YouTube video ID here
+MY_VIDEO_ID = "U_M_uvDChJQ"  # Add your desired YouTube video ID here
 
 # ----------------------- #
 # Configuration variables #
@@ -37,7 +37,7 @@ ARCHIVE_BUCKET_NAME = "archive"
 
 # DuckDB config
 DUCKDB_INSTANCE_NAME = json.loads(os.environ["AIRFLOW_CONN_DUCKDB_DEFAULT"])["host"]
-COMMENTS_IN_TABLE_NAME = "in_comments"
+COMMENTS_IN_TABLE_NAME = "in_comments" + "_" + MY_VIDEO_ID
 
 # Datasets
 DS_DUCKDB_IN_COMMENTS = Dataset("duckdb://in_comments")

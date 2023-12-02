@@ -2,8 +2,8 @@ import spacy
 from googleapiclient.discovery import build
 from textblob import TextBlob
 
-API_KEY = 'AIzaSyCdbxtEG65nVMmUr_0U0vNLoVKwzdv7g_0'
-VIDEO_ID = 'VzjoHtYN05k'
+API_KEY = ''
+VIDEO_ID = 'U_M_uvDChJQ'
 
 youtube = build('youtube', 'v3', developerKey=API_KEY)
 

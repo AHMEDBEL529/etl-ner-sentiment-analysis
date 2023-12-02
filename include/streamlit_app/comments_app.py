@@ -2,6 +2,7 @@ import streamlit as st
 import duckdb
 import pandas as pd
 import altair as alt
+from include.global_variables import global_variables as gv
 
 # GETTING DATA
 
@@ -11,7 +12,7 @@ def get_sentiment_data(db=f"/usr/local/airflow/{duck_db_instance_name}"):
     """Function to query a local DuckDB instance for sentiment data."""
     cursor = duckdb.connect(db)
     sentiment_data = cursor.execute(
-        """SELECT name, sentiment, count FROM output;"""
+        f"""SELECT name, sentiment, count FROM {"output" + "_" + gv.MY_VIDEO_ID};"""
     ).fetchall()
     cursor.close()
     df = pd.DataFrame(sentiment_data, columns=["name", "sentiment", "count"])
