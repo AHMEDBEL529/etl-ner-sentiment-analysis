@@ -1,4 +1,4 @@
-"""DAG that loads climate and weather data from MinIO to DuckDB."""
+"""DAG that loads comments data from MinIO to DuckDB."""
 
 # --------------- #
 # PACKAGE IMPORTS #
@@ -40,21 +40,13 @@ from include.custom_operators.minio import (
 
 def load_data():
 
-    # create an instance of the CreateBucket task group consisting of 5 tasks
-    # create_bucket_tg = CreateBucket(
-    #     task_id="create_archive_bucket", bucket_name=gv.ARCHIVE_BUCKET_NAME
-    # )
-
-    list_files_comments_bucket = MinIOListOperator(
-        task_id="list_files_comments_bucket", bucket_name=gv.COMMENTS_BUCKET_NAME
-    )
-
     @task(outlets=[gv.DS_DUCKDB_IN_COMMENTS], pool="duckdb")
     def load_comments_data(obj):
         """Loads content of one fileobject in the MinIO comments bucket
         to DuckDB."""
 
-        minio_client = gv.get_minio_client()
+        minio_client = gv.get_minio_client() 
+
         # get the object from MinIO and save as a local tmp file
         minio_client.fget_object(gv.COMMENTS_BUCKET_NAME, obj, file_path=obj)
 
@@ -86,16 +78,7 @@ def load_data():
         os.remove(obj)
 
     # set dependencies
-
-    # climate_data = load_climate_data.expand(obj=list_files_climate_bucket.output)
-    weather_data = load_comments_data.expand(
-        obj=list_files_comments_bucket.output
-    )
-    
-    # # archive_bucket = create_bucket_tg
-
-    # [climate_data, weather_data] >> archive_bucket
-    # (archive_bucket >> [copy_objects_to_archive] >> delete_objects)
+    weather_data = load_comments_data(gv.MY_VIDEO_ID + ".json")
 
 
 load_data()
