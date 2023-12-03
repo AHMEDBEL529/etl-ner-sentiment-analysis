@@ -4,7 +4,7 @@ from textblob import TextBlob
 from include.global_variables import global_variables as gv
 
 
-API_KEY = ''
+API_KEY = 'AIzaSyAUmTa-CxEAZJs10BUl3VO8XbX0EdsNoSw'
 VIDEO_ID = gv.MY_VIDEO_ID
 
 youtube = build('youtube', 'v3', developerKey=API_KEY)
