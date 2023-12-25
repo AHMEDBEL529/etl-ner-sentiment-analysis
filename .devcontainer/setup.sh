@@ -4,12 +4,12 @@
 curl -sSL install.astronomer.io | sudo bash -s
 
 # Create the directory for models
-mkdir -p ./models/bert-base-NER
-mkdir -p ./models/bertweet-base-sentiment-analysis
+mkdir -p ./models/span-marker-mbert-base-multinerd
+mkdir -p ./models/bart-large-mnli
 
 # Clone the necessary repositories
-git clone https://huggingface.co/dslim/bert-base-NER ./models/bert-base-NER
-git clone https://huggingface.co/finiteautomata/bertweet-base-sentiment-analysis ./models/bertweet-base-sentiment-analysis
+git clone https://huggingface.co/tomaarsen/span-marker-mbert-base-multinerd ./models/span-marker-mbert-base-multinerd
+git clone https://huggingface.co/facebook/bart-large-mnli ./models/bart-large-mnli
 
 # Wait for Docker daemon to be ready
 sleep 20
